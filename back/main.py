@@ -4,11 +4,10 @@ from pydantic import BaseModel
 app = FastAPI()
 
 class GameRequest(BaseModel):
-    genre: str         # 장르
-    play_time: str     # 하루 플레이 시간
-    platform: str      # 플랫폼
+    genre: str        
+    play_time: str    
+    platform: str     
 
-# 게임 추천 데이터
 GAME_DB = {
     ("액션", "1시간 미만", "PC"): [
         {"title": "Hades", "reason": "짧은 런으로 즐길 수 있는 중독성 높은 로그라이크 액션"},
@@ -95,7 +94,6 @@ def get_recommendation(genre: str, play_time: str, platform: str):
     if games:
         return games
 
-    # 완전히 일치하는 키가 없으면 장르만 맞는 것 중 랜덤 반환
     fallback = []
     for k, v in GAME_DB.items():
         if k[0] == genre:
